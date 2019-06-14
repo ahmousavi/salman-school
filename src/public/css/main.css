@@ -1,0 +1,17 @@
+body {
+    direction: rtl !important;
+    text-align: right;
+	font-family: IRANSans !important;
+}
+.row {
+    flex-direction: row-reverse !important;
+}
+
+#site-main {
+    height: 100vh;
+}
+.row.centeral {
+    height: 100vh;
+    align-items: center !important;
+    justify-content: center !important;
+}
