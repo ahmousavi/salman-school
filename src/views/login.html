@@ -1,0 +1,22 @@
+{{#yield-title}}
+ورود | دبیرستان سلمان‌
+{{/yield-title}}
+
+
+{{#yield-main}}
+<form action="/login" method="post">
+    <div>
+        <label for="natcode">کد ملی</label>
+        <input type="text" name="natcode" id="natcode">
+    </div>
+    <div>
+        <label for="password">رمز عبور</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <div>
+        <input type="submit" id="login-btn" value="ورود">
+    </div>
+</form>
+<br>
+<p>{{ error.message }}</p>
+{{/yield-main}}
