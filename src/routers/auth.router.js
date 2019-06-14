@@ -91,8 +91,9 @@ router.post('/login', function (req, res) {
 })
 
 router.get('/logout', checkToken, function (req, res) {
+    window.URL = '/login'
     res.cookie('sch-token', '', { maxAge: 0, httpOnly: true });
-    res.send('logged out')
+    res.redirect('/login')
 })
 
 
