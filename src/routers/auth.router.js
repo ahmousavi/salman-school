@@ -2,31 +2,7 @@ const router = require('express').Router();
 const User = require('./../models/user.model')
 const bcrypt = require('bcrypt')
 const { SECRET_KEY } = require('./../config')
-
-
-function checkToken(req, res, next) {
-    let token = req.cookies['sch-token'] || null
-    if (token) {
-        User.findOne({ token: token }, (err, user) => {
-            if (err) {
-                console.log('Error', err);
-                res.render('error', { error: err })
-            }
-            else if (user) {
-                req.user = user
-                next();
-            }
-            else {
-                res.cookie('sch-token', '', { maxAge: 0, httpOnly: true });
-                res.end();
-            }
-        })
-    }
-    else {
-        res.render('login', {'layout': ''})
-    }
-}
-
+const { checkToken } = require('./../utiles')
 router.get('/login', function (req, res) {
     let token = req.cookies['sch-token'] || null
     if (token) {
@@ -36,12 +12,7 @@ router.get('/login', function (req, res) {
                 res.render('error', { error: err })
             }
             else if (user) {
-                if (user.user_type === 'Student') {
-                    res.render('panel_stu', {user: user})
-                }
-                else if (user.user_type === 'Employee') {
-                    res.render('panel_emp', {user: user})
-                }
+                res.redirect('/panel')
             }
             else {
                 res.cookie('sch-token', '', { maxAge: 0, httpOnly: true });
@@ -71,29 +42,35 @@ router.post('/login', function (req, res) {
                     user.token = token
                     user.save().catch(err => console.log("Set token", err))
                     res.cookie('sch-token', token, { maxAge: 2*60*60*1000, httpOnly: true })
-                    if (user.user_type === 'Student') {
-                        res.redirect('/panel')
-                    }
-                    else if (user.user_type === 'Employee') {
-                        res.redirect('/panel')
-                    }
+                    req.user = user
+                    res.redirect('/panel')
                 }
                 else {
-                    res.render('login', {error: {message: 'wrong password'}})
+                    res.redirect('login')
                 }
             })
         }
         else {
-            res.render('login', {error: {message: 'user not found'}})
+            res.redirect('login')
         }
     })
 
 })
 
 router.get('/logout', checkToken, function (req, res) {
-    window.URL = '/login'
     res.cookie('sch-token', '', { maxAge: 0, httpOnly: true });
     res.redirect('/login')
+})
+
+router.get('/panel', checkToken ,function (req, res) {
+    console.log('CheckToken', req.user);
+    
+    if (req.user.user_type === 'Student') {
+        res.render('panel_stu', {user: res.user})
+    }
+    else if (req.user.user_type === 'Employee') {
+        res.render('panel_emp', {user: res.user})
+    }
 })
 
 
