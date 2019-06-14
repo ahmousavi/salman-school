@@ -1,52 +1,65 @@
-{{#yield-title}}
-ورود | دبیرستان سلمان‌
-{{/yield-title}}
+<!DOCTYPE html>
+<html lang="fa">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ورود | دبیرستان سلمان</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
 
-{{#yield-main}}
-<div class="container">
-    <div class="row centeral">
-        <div class="col-md-4 col">
-            <form id="login-form" action="/login" method="post">
-                <h2>ورود</h2>
-                <div class="form-group">
-                    <label for="natcode">کد ملی</label>
-                    <input type="text" class="form-control" name="natcode" id="natcode">
-                </div>
-                <div class="form-group">
-                    <label for="password">رمز عبور</label>
-                    <input type="password" class="form-control" name="password" id="password">
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" id="login-btn" value="ورود">
-                </div>
+<body dir="rtl">
+    <main id="site-main">
 
-                {{#error}}
-                <br>
-                <div class="alert alert-danger" role="alert">
-                    خطا: {{ error.message }}
+        <div class="container">
+            <div class="row centeral">
+                <div class="col-md-4 col">
+                    <form id="login-form" action="/login" method="post">
+                        <h2>ورود</h2>
+                        <div class="form-group">
+                            <label for="natcode">کد ملی</label>
+                            <input type="text" class="form-control" name="natcode" id="natcode">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">رمز عبور</label>
+                            <input type="password" class="form-control" name="password" id="password">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" id="login-btn" value="ورود">
+                        </div>
+
+                        {{#error}}
+                        <br>
+                        <div class="alert alert-danger" role="alert">
+                            خطا: {{ error.message }}
+                        </div>
+                        {{/error}}
+                    </form>
                 </div>
-                {{/error}}
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
-<style>
-    body {
-        background: linear-gradient(#02aab0, #00cdac);
-    }
+        <style>
+            body {
+                background: linear-gradient(#02aab0, #00cdac);
+            }
 
-    #login-form {
-        background: #ffffff;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px 2px rgba(0, 0, 0, .2);
-    }
-    h2 {
-        text-align: center;
-        color: #222;
-        margin-bottom: 20px;
-    }
-</style>
-{{/yield-main}}
+            #login-form {
+                background: #ffffff;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 2px 10px 2px rgba(0, 0, 0, .2);
+            }
+
+            h2 {
+                text-align: center;
+                color: #222;
+                margin-bottom: 20px;
+            }
+        </style>
+    </main>
+</body>
+
+</html>

@@ -23,7 +23,7 @@ function checkToken(req, res, next) {
         })
     }
     else {
-        res.render('login')
+        res.render('login', {'layout': ''})
     }
 }
 
@@ -36,17 +36,21 @@ router.get('/login', function (req, res) {
                 res.render('error', { error: err })
             }
             else if (user) {
-                req.user = user
-                res.render('/panel')
+                if (user.user_type === 'Student') {
+                    res.render('panel_stu', {user: user})
+                }
+                else if (user.user_type === 'Employee') {
+                    res.render('panel_emp', {user: user})
+                }
             }
             else {
                 res.cookie('sch-token', '', { maxAge: 0, httpOnly: true });
-                res.render('login')
+                res.render('login', {'layout': ''})
             }
         })
     }
     else {
-        res.render('login')
+        res.render('login', {'layout': ''})
     }
 })
 
@@ -66,9 +70,9 @@ router.post('/login', function (req, res) {
                     const token = bcrypt.hashSync(natcode + SECRET_KEY, 10)
                     user.token = token
                     user.save().catch(err => console.log("Set token", err))
-                    res.cookie('sch-token', token, { maxAge: 900000, httpOnly: true })
+                    res.cookie('sch-token', token, { maxAge: 2*60*60*1000, httpOnly: true })
                     if (user.user_type === 'Student') {
-                        res.redirect('/student/panel')
+                        res.redirect('/panel')
                     }
                     else if (user.user_type === 'Admin') {
                         res.redirect('/admin')
@@ -93,7 +97,7 @@ router.post('/logout', function (req, res) {
         res.send('logged out')
     }
     else {
-        res.render('login')
+        res.render('login', {'layout': ''})
     }
 })
 
