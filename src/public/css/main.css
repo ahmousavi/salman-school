@@ -1,17 +1,61 @@
 body {
     direction: rtl !important;
     text-align: right;
-	font-family: IRANSans !important;
+    font-family: IRANSans !important;
+    overflow-x: hidden !important;
 }
 .row {
-    flex-direction: row-reverse !important;
+    /* flex-direction: row-reverse !important; */
+}
+.mp0 {
+    margin: 0;
+    padding: 0;
+}
+a {
+    transition: all .3s ease;
 }
 
-#site-main {
+#panel-main {
     height: 100vh;
+    background: #f1f3f5;
 }
 .row.centeral {
     height: 100vh;
     align-items: center !important;
     justify-content: center !important;
+}
+
+/* background: linear-gradient(#02aab0, #00cdac); */
+#panel-main #sidebar {
+    background: #263238;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+#panel-main #sidebar .sidebar-header {
+    height: 65px;
+    background: #3e8ef7;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    line-height: 65px;
+    margin-bottom: 50px;
+}
+
+#panel-main #sidebar .sidebar-menu {
+    width: 100%;
+}
+
+#panel-main .sidebar-item a {
+    color: rgba(163,175,183,.9);
+    border-bottom: 1px solid rgba(163,175,183,.05);
+    display: block;
+    padding: 15px 35px;
+}
+#panel-main #sidebar .sidebar-item a:hover {
+    text-decoration: none;
+    color: #eee;
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,21 @@
     <link rel="stylesheet" href="/css/main.css">
     {{{ yield-head }}}
 </head>
+
 <body dir="rtl">
-    <main id="site-main">
-        {{{ yield-main }}}
+    <main id="panel-main">
+        <div class="container-fluid mp0">
+            <div class="row">
+                <div class="col-md-3">
+                    {{{ yield-menu }}}
+                </div>
+                <div class="col-md-9">
+                    {{{ yield-content }}}
+                </div>
+            </div>
+        </div>
     </main>
     {{{ yield-footer }}}
 </body>
+
 </html>
