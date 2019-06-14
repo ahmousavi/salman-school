@@ -10,11 +10,6 @@ app.set('layout', 'layouts/layout')
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function (req, res) {
-    res.render('home', {
-        name: 'amir'
-    }, )
-    // res.send("OK, Start, Build somthing amazing")
-})
+app.use('/user', require('./routers/user.router'))
 
 module.exports = app

@@ -1,14 +1,6 @@
+const mongoose = require('mongoose')
 const { DATABASE_URL } = require('./config')
 
-// const MongoClient = require('mongodb').MongoClient;
-
-// MongoClient.connect(DATABASE_URL, function (err, db) {
-//     if (err) throw err;
-//     console.log("Database created!");
-//     db.close();
-// });
-
-var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
 mongoose.set('useNewUrlParser', true);
