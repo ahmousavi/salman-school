@@ -74,8 +74,8 @@ router.post('/login', function (req, res) {
                     if (user.user_type === 'Student') {
                         res.redirect('/panel')
                     }
-                    else if (user.user_type === 'Admin') {
-                        res.redirect('/admin')
+                    else if (user.user_type === 'Employee') {
+                        res.redirect('/panel')
                     }
                 }
                 else {
@@ -90,15 +90,9 @@ router.post('/login', function (req, res) {
 
 })
 
-router.post('/logout', function (req, res) {
-    let token = req.cookies['sch-token'] || null
-    if (token) {
-        res.cookie('sch-token', '', { maxAge: 0, httpOnly: true });
-        res.send('logged out')
-    }
-    else {
-        res.render('login', {'layout': ''})
-    }
+router.get('/logout', checkToken, function (req, res) {
+    res.cookie('sch-token', '', { maxAge: 0, httpOnly: true });
+    res.send('logged out')
 })
 
 
