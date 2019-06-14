@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const { SECRET_KEY } = require('./../config')
 
 
-export function checkToken(req, res, next) {
+function checkToken(req, res, next) {
     let token = req.cookies['sch-token'] || null
     if (token) {
         User.findOne({ token: token }, (err, user) => {
