@@ -32,7 +32,7 @@ router.get('/letter', checkToken, function (req, res) {
 })
 
 router.get('/letter/new', checkToken, function (req, res) {
-    Employee.find({}, (err, emps) => {
+    Employee.find({_id: { $ne: req.user._id }}, (err, emps) => {
         if (err) {
             res.render('error', { error: err })
         }
