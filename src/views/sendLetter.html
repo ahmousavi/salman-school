@@ -9,7 +9,7 @@
 
 {{#yield-content}}
 {{#letter}}
-<form action="/panel/letter" method="POST">
+<form action="/panel/letter" enctype="multipart/form-data" method="POST" style="width: 60%; margin: auto">
     <div class="form-group">
         <label for="subject">گیرنده</label>
         {{#reply}}

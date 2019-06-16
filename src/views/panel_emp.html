@@ -1,21 +1,30 @@
 {{#yield-title}}
-    پنل کارمندان
+اطلاعات شخصی
 {{/yield-title}}
 
 
-{{#yield-menu}}
-<nav id="sidebar">
-    <div class="sidebar-header">
-        <div>پنل کارمندان</div>
+
+{{#yield-options}}
+
+{{/yield-options}}
+
+{{#yield-content}}
+<div class="" style="width: 80%; margin: auto">
+    {{#user}}
+    <div class="card-body">
+        <!-- <h5 style="font-weight: bold" class="card-title">اطلاعات کاربری</h5> -->
+        <br>
+        <div class="card-text">
+            <ul class="list-group list-group">
+                <li class="list-group-item">نام‌: {{first_name}} {{last_name}}</li>
+                <li class="list-group-item">نام پدر: {{father_name}}</li>
+                <li class="list-group-item">کد ملی: {{national_code}}</li>
+                <li class="list-group-item">سمت شغلی: {{role}}</li>
+            </ul>
+            
+        </div>
+        <br>
     </div>
-    <div class="sidebar-menu">
-        <div class="sidebar-item"><a href="#">صفحه اصلی</a></div>
-        <div class="sidebar-item"><a href="#">ثبت اطلاعات دانش آموز</a></div>
-        <div class="sidebar-item"><a href="/panel/letter">نامه ها</a></div>
-        <div class="sidebar-item"><a href="#">ویرایش اطلاعات</a></div>
-    </div>
-    <div class="sidebar-footer">
-        <div class="sidebar-item"><a href="/logout">خروج</a></div>
-    </div>
-</nav>
-{{/yield-menu}}
+    {{/user}}
+</div>
+{{/yield-content}}
