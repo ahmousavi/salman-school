@@ -1,0 +1,43 @@
+{{#yield-title}}
+لیست دانش آموزان
+{{/yield-title}}
+
+{{#yield-options}}
+<form action="/panel/student" method="GET">
+    <div class="input-group" dir="ltr">
+        <div class="input-group-prepend">
+            <input type="submit" class="btn btn-primary" value="بیاب" id="button-addon2">
+        </div>
+        <input type="text" class="form-control" placeholder="کد ملی ، نام خانوادگی" name="key" aria-label="جست و جو"
+            aria-describedby="basic-addon2">
+    </div>
+</form>
+{{/yield-options}}
+
+
+{{#yield-content}}
+<br><br>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">نام</th>
+            <th scope="col">نام پدر</th>
+            <th scope="col">کد ملی</th>
+            <th scope="col">آدرس</th>
+            <th scope="col">معدل</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#students}}
+        <tr>
+            <td><a href="#">{{first_name}} {{last_name}}</a></td>
+            <td>{{father_name}}</td>
+            <td>{{national_code}}</td>
+            <td>{{address}}</td>
+            <td>{{total_average}}</td>
+        </tr>
+        {{/students}}
+    </tbody>
+</table>
+
+{{/yield-content}}

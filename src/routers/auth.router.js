@@ -3,6 +3,10 @@ const User = require('./../models/user.model')
 const bcrypt = require('bcrypt')
 const { SECRET_KEY } = require('./../config')
 const { checkToken } = require('./../utiles')
+
+router.get('/', (req, res) => {
+    res.redirect('/login')
+})
 router.get('/login', function (req, res) {
     let token = req.cookies['sch-token'] || null
     if (token) {

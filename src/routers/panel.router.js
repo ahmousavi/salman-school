@@ -104,9 +104,25 @@ router.post('/student/new', checkToken, function (req, res) {
     stu.address = req.body.address
 
     stu.save()
-        .then(user => console.log('User', user))
-        .catch(err => console.error('#Error', err))
+        .then(user => res.redirect('/panel/student'))
+        .catch(err => res.render('error', { error: err }))
 })
 
+router.get('/student/:key?', checkToken, function (req, res) {
+    const key = req.query.key;
+    if (key) {
+        Student.find({ $or:[ {'national_code': key}, {'last_name':key}, ]}).then(students => {
+            res.render('students', {students})
+        })
+        .catch(err => res.render('error', { error: err }))
+    }
+    else {
+        Student.find({}).then(students => {
+            res.render('students', {students})
+        })
+        .catch(err => res.render('error', { error: err }))
+    }
+    // res.render('students')
+})
 
 module.exports = router
