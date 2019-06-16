@@ -15,10 +15,10 @@ const letterSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    subject: {
-        type: String,
-        default: 'بدون موضوع'
-    },
+    // subject: {
+    //     type: String,
+    //     default: 'بدون موضوع'
+    // },
     text: {
         type: String,
         required: true,

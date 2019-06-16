@@ -12,19 +12,31 @@
 </head>
 
 <body dir="rtl">
-    <main id="panel-main">
-        <div class="container-fluid mp0">
-            <div class="row">
-                <div class="col-md-3">
-                    {{{ yield-menu }}}
-                </div>
-                <div class="col-md-9">
-                    {{{ yield-content }}}
-                </div>
+    <div class="container-fluid mp0">
+        <header class="page-header">
+            <div style="">{{{ yield-title }}}</div>
+        </header>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <div>پنل کارمندان</div>
             </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-item"><a href="/panel">صفحه اصلی</a></div>
+                <div class="sidebar-item"><a href="#">ثبت اطلاعات دانش آموز</a></div>
+                <div class="sidebar-item"><a href="/panel/letter">ارسال نامه</a></div>
+                <div class="sidebar-item"><a href="#">ویرایش اطلاعات</a></div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="sidebar-item"><a href="/logout">خروج</a></div>
+            </div>
+        </nav>
+        <div id="panel-main">
+            <main>
+                {{{ yield-content }}}
+            </main>
         </div>
-    </main>
-    {{{ yield-footer }}}
+        </main>
+        {{{ yield-footer }}}
 </body>
 
 </html>
