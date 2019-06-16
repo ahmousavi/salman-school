@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{{ yield-title }}} | دبیرستان سلمان</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    {{{ yield-head }}}
+</head>
+
+<body dir="rtl">
+    <div class="container-fluid mp0">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <div>پنل دانش آموزان</div>
+            </div>
+            <div class="user-info">
+                {{yield-userinfo}}
+            </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-item"><a href="/panel">صفحه اصلی</a></div>
+                <div class="sidebar-item"><a href="#">ویرایش اطلاعات</a></div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="sidebar-item"><a href="/logout">خروج</a></div>
+            </div>
+        </nav>
+        <div id="panel-main">
+            <header class="page-header">
+                <div>{{{ yield-title }}}</div>
+                <div>{{{ yield-options }}}</div>
+            </header>
+            <main>
+                {{{ yield-content }}}
+            </main>
+        </div>
+        </main>
+        {{{ yield-footer }}}
+</body>
+
+</html>

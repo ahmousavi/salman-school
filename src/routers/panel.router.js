@@ -22,7 +22,7 @@ router.get('/', checkToken, function (req, res) {
     console.log('CheckToken', req.user);
 
     if (req.user.user_type === 'Student') {
-        res.render('panel_stu', { user: req.user })
+        res.render('panel_stu', { user: req.user, 'layout': 'layouts/stupanel' })
     }
     else if (req.user.user_type === 'Employee') {
         res.render('panel_emp', { user: req.user })
@@ -101,6 +101,7 @@ router.post('/student/new', checkToken, function (req, res) {
     stu.birthday = req.body.birthday
     stu.national_code = req.body.natcode
     stu.password = req.body.password
+    stu.address = req.body.address
 
     stu.save()
         .then(user => console.log('User', user))

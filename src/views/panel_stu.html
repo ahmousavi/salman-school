@@ -1,20 +1,32 @@
 {{#yield-title}}
-پنل دانش آموزان
+اطلاعات شخصی
 {{/yield-title}}
 
-{{#yield-menu}}
-<nav id="sidebar">
-    <div class="sidebar-header">
-        <div>پنل دانش آموزان</div>
+
+
+{{#yield-options}}
+
+{{/yield-options}}
+
+{{#yield-content}}
+<div class="" style="width: 80%; margin: auto">
+    {{#user}}
+    <div class="card-body">
+        <!-- <h5 style="font-weight: bold" class="card-title">اطلاعات کاربری</h5> -->
+        <br>
+        <div class="card-text">
+            <ul class="list-group list-group">
+                <li class="list-group-item">نام‌: {{first_name}} {{last_name}}</li>
+                <li class="list-group-item">نام پدر: {{father_name}}</li>
+                <li class="list-group-item">کد ملی: {{national_code}}</li>
+                <li class="list-group-item">آدرس منزل: {{address || تعیین نشده}}</li>
+                <li class="list-group-item">معدل کل: {{total_average}}</li>
+                <li class="list-group-item">نمره انضباط: {{discipline_score}}</li>
+            </ul>
+            
+        </div>
+        <br>
     </div>
-    <div class="sidebar-menu">
-        <div class="sidebar-item"><a href="#">صفحه اصلی</a></div>
-        <div class="sidebar-item"><a href="#">مشاهده کارنامه</a></div>
-        <div class="sidebar-item"><a href="#">مشاهده برنامه کلاسی</a></div>
-        <div class="sidebar-item"><a href="#">ویرایش اطلاعات</a></div>
-    </div>
-    <div class="sidebar-footer">
-        <div class="sidebar-item"><a href="/logout">خروج</a></div>
-    </div>
-</nav>
-{{/yield-menu}}
+    {{/user}}
+</div>
+{{/yield-content}}
