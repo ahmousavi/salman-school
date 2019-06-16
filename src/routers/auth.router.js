@@ -46,12 +46,12 @@ router.post('/login', function (req, res) {
                     res.redirect('/panel')
                 }
                 else {
-                    res.redirect('login')
+                    res.render('login', {error: true, 'layout': ''})
                 }
             })
         }
         else {
-            res.redirect('login')
+            res.render('login', {error: true, 'layout': ''})
         }
     })
 
