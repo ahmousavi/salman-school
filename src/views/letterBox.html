@@ -1,0 +1,53 @@
+{{#yield-title}}
+نامه ها
+{{/yield-title}}
+
+{{#yield-options}}
+<a class="btn btn-outline-primary btn-sm" href="/panel/letter/new">ارسال نامه جدید</a>
+{{/yield-options}}
+
+
+{{#yield-content}}
+<table class="table table-bordered">
+    <h3>نامه های دریافت شده</h3>
+    <thead>
+        <tr>
+            <th scope="col">عنوان</th>
+            <th scope="col">فرستنده</th>
+            <th scope="col">تاریخ ارسال</th>
+            <!-- <th scope="col">گزی</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        {{#recivedLetters}}
+        <tr>
+            <td><a href="/panel/letter/{{_id}}">{{title}}</a></td>
+            <td>آقای {{sender.last_name}}</td>
+            <td>{{createdAt.toDateString}}</td>
+        </tr>
+        {{/recivedLetters}}
+    </tbody>
+</table>
+<br><br><br>
+<table class="table table-bordered">
+    <h3>نامه های ارسال شده</h3>
+    <thead>
+        <tr>
+            <th scope="col">عنوان</th>
+            <th scope="col">گیرنده</th>
+            <th scope="col">تاریخ ارسال</th>
+            <!-- <th scope="col">گزی</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        {{#sentLetters}}
+        <tr>
+            <td><a href="/panel/letter/{{_id}}">{{title}}</a></td>
+            <td>آقای {{reciver.last_name}}</td>
+            <td>{{createdAt.toDateString}}</td>
+        </tr>
+        {{/sentLetters}}
+    </tbody>
+</table>
+
+{{/yield-content}}
