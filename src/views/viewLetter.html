@@ -1,0 +1,33 @@
+{{#yield-title}}
+مشاهده نامه
+{{/yield-title}}
+
+
+{{#yield-options}}
+
+{{/yield-options}}
+
+{{#yield-content}}
+<div class="card" style="width: 80%; margin: auto">
+    {{#letter}}
+    <div class="card-body">
+        <h5 style="font-weight: bold" class="card-title">{{title}}</h5>
+        <p class="card-text">{{text}}</p>
+        <br>
+        <div>
+            {{#attachment}}
+                <p>پیوست: <a href="/attachment/{{_id}}">دانلود</a></p>
+            {{/attachment}}
+            {{^attachment}}            
+                <p>پیوست ندارد</p>
+            {{/attachment}}
+        </div>
+        
+        <br>
+        <p>فرستنده: {{sender.first_name}} {{sender.last_name}}</p>
+        <br>
+        <a href='/panel/letter/{{_id}}/reply' class="btn btn-primary">پاسخ</a>
+    </div>
+    {{/letter}}
+</div>
+{{/yield-content}}

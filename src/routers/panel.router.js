@@ -15,15 +15,20 @@ router.get('/', checkToken, function (req, res) {
 })
 
 router.get('/letter', checkToken, function (req, res) {
-    Letter.find({ reciver: req.user._id }).populate('sender')
-        .then(recivedLetters => {
-            Letter.find({ reciver: req.user._id }).populate('reciver')
-                .then(sentLetters => {
-                    res.render('letterBox', {sentLetters, recivedLetters})
-                })
-                .catch(err => res.render('error', { error: err }))
+    Letter.find({ reciver: req.user._id })
+        .populate('sender')
+        .exec((err, recivedLetters) => {
+            if (err) {
+                res.render('error', { error: err })
+            }
+            else {
+                Letter.find({ sender: req.user._id }).populate('reciver')
+                    .then(sentLetters => {
+                        res.render('letterBox', { sentLetters, recivedLetters })
+                    })
+                    .catch(err => res.render('error', { error: err }))
+            }
         })
-        .catch(err => res.render('error', { error: err }))
 })
 
 router.get('/letter/new', checkToken, function (req, res) {
@@ -33,7 +38,7 @@ router.get('/letter/new', checkToken, function (req, res) {
         }
         else {
             let a = [1, 2, 3, 4, 5]
-            res.render('sendLetter', { user: req.user, employees: emps });
+            res.render('sendLetter', { user: req.user, employees: emps, letter: {} });
         }
     })
 })
@@ -50,6 +55,22 @@ router.post('/letter', checkToken, function (req, res) {
         .catch(err => res.render('error', { error: err }))
 })
 
+router.get('/letter/:id', checkToken, function (req, res) {
+    Letter.find({ _id: req.params.id }).populate('sender')
+        .then(letter => {
+            res.render('viewLetter', { letter })
+        })
+        .catch(err => res.render('error', { error: err }))
+})
+
+
+router.get('/letter/:id/reply', checkToken, function (req, res) {
+    Letter.find({ _id: req.params.id }).populate('sender')
+        .then(letter => {
+            res.render('sendLetter', { letter, reply: true, })
+        })
+        .catch(err => res.render('error', { error: err }))
+})
 
 
 module.exports = router

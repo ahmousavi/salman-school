@@ -8,22 +8,41 @@
 {{/yield-menu}}
 
 {{#yield-content}}
+{{#letter}}
 <form action="/panel/letter" method="POST">
     <div class="form-group">
         <label for="subject">گیرنده</label>
+        {{#reply}}
+        <select readonly class="form-control" name="reciver" id="reciver">
+            <option value="{{sender._id}}">
+                آقای {{sender.last_name}}
+            </option>
+        </select>
+        {{/reply}}
+        {{^reply}}
         <select class="form-control" name="reciver" id="reciver">
             {{#employees}}
-                <option value="{{_id}}">
-                    آقای {{last_name}}
-                </option>
+            <option value="{{_id}}">
+                آقای {{last_name}}
+            </option>
             {{/employees}}
         </select>
+        {{/reply}}
     </div>
 
+    {{#reply}}
+    <div class="form-group">
+        <label for="title">عنوان</label>
+        <input class="form-control" readonly type="text" name="title" id="title" value="پاسخ به {{title}}">
+    </div>
+    {{/reply}}
+    {{^reply}}
     <div class="form-group">
         <label for="title">عنوان</label>
         <input class="form-control" type="text" name="title" id="title">
     </div>
+    {{/reply}}
+
     <div class="form-group">
         <label for="subject">متن</label>
         <textarea class="form-control" rows="7" name="text" id="text"></textarea>
@@ -38,4 +57,5 @@
         <input type="submit" class="btn btn-primary" value="ارسال">
     </div>
 </form>
+{{/letter}}
 {{/yield-content}}
