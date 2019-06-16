@@ -4,6 +4,20 @@ const Student = require('../models/student.model')
 const Employee = require('../models/employee.model')
 const { checkToken } = require('../utiles')
 const Letter = require('../models/letter.model')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'src/public/attachments')
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.user._id + '-' +file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
+
+
 router.get('/', checkToken, function (req, res) {
     console.log('CheckToken', req.user);
 
@@ -33,7 +47,7 @@ router.get('/letter', checkToken, function (req, res) {
 })
 
 router.get('/letter/new', checkToken, function (req, res) {
-    Employee.find({_id: { $ne: req.user._id }}, (err, emps) => {
+    Employee.find({ _id: { $ne: req.user._id } }, (err, emps) => {
         if (err) {
             res.render('error', { error: err })
         }
@@ -44,14 +58,17 @@ router.get('/letter/new', checkToken, function (req, res) {
     })
 })
 
-router.post('/letter', checkToken, function (req, res) {
+router.post('/letter', checkToken, upload.single('attachment'), function (req, res) {
     let letter = new Letter()
     letter.sender = req.user._id
     letter.reciver = req.body.reciver
     letter.title = req.body.title
     letter.text = req.body.text
+    if (req.file) {
+        letter.attachment = req.file.filename
+    }
     letter.save().then(letter => {
-        res.send({ ...letter })
+        res.redirect('/panel/letter')
     })
         .catch(err => res.render('error', { error: err }))
 })
@@ -72,11 +89,11 @@ router.get('/letter/:id/reply', checkToken, function (req, res) {
         .catch(err => res.render('error', { error: err }))
 })
 
-router.get('/student/new', checkToken, function(req, res) {
+router.get('/student/new', checkToken, function (req, res) {
     res.render('newStudent')
 })
 
-router.post('/student/new', checkToken, function(req, res) {
+router.post('/student/new', checkToken, function (req, res) {
     let stu = new Student()
     stu.first_name = req.body.firstname
     stu.last_name = req.body.lastname
@@ -84,10 +101,10 @@ router.post('/student/new', checkToken, function(req, res) {
     stu.birthday = req.body.birthday
     stu.national_code = req.body.natcode
     stu.password = req.body.password
-    
+
     stu.save()
-    .then(user => console.log('User', user))
-    .catch(err => console.error('#Error', err))
+        .then(user => console.log('User', user))
+        .catch(err => console.error('#Error', err))
 })
 
 
