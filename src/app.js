@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routers/auth.router'))
 app.use('/user', require('./routers/user.router'))
+app.use('/panel', require('./routers/panel.router'))
 
 app.get('/test', (req, res) => {
     res.send({cookies: req.cookies || "No"})

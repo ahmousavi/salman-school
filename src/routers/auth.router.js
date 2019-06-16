@@ -62,16 +62,4 @@ router.get('/logout', checkToken, function (req, res) {
     res.redirect('/login')
 })
 
-router.get('/panel', checkToken ,function (req, res) {
-    console.log('CheckToken', req.user);
-    
-    if (req.user.user_type === 'Student') {
-        res.render('panel_stu', {user: res.user})
-    }
-    else if (req.user.user_type === 'Employee') {
-        res.render('panel_emp', {user: res.user})
-    }
-})
-
-
 module.exports = router
